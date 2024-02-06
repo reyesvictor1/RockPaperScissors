@@ -4,9 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap" rel="stylesheet">
+
 </head>
 <body>
+    <h1 id="main-title">Rock, paper, scissors!</h1>
+    <div id="buttons-container">
+        <button class="game-btn" id="rock">ROCK</button>
+        <button class="game-btn" id="paper">PAPER</button>
+        <button class="game-btn" id="scissors">SCISSORS</button>
+    </div>
+    <h4 id="round-choices"></h4>
+    <h2 id="round-results"></h2>
+    <div id="score-bar">
+        <p>
+            COMPUTER
+            <span id="computer-score">0</span> -
+            <span id="player-score">0</span>
+            YOU
+        </p>
+    </div>
+    <button id="reset-btn">RESET</button>
 </body>
 </html>
