@@ -1,0 +1,23 @@
+body {
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+#buttons-container {
+    display: flex;
+    margin: 30px;
+    height: 200px;
+}
+
+.game-btn {
+    flex: 1;
+    margin: 20px;
+    font-size: 40px;
+}
+
+/** {
+    border: 2px solid red;
+}*/

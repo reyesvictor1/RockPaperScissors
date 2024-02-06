@@ -1,79 +1,68 @@
+let globalPlayerScore = 0;
+let globalComputerScore = 0;
+
+const roundChoices = document.querySelector("#round-choices");
+const roundResults = document.querySelector('#round-results');
+const computerScore = document.querySelector('#computer-score');
+const playerScore = document.querySelector('#player-score');
+
+const gameButtons = document.querySelectorAll('.game-btn');
+gameButtons.forEach((button) => {
+    button.addEventListener('click', playRound); // not possible to pass arguments to the function
+})
+
+const resetButton = document.querySelector('#reset-btn');
+resetButton.addEventListener('click', resetScore);
+
+//======================= functions =======================
+
 function getComputerChoice() {
     const choice = Math.floor(Math.random() * 3);
     switch (choice) {
         case 0:
-            return "rock";
+            return 'rock';
         case 1:
-            return "paper";
+            return 'paper';
         case 2:
-            return "scissors";
+            return 'scissors';
     }
     return choice;
 }
 
-function getPlayerChoice() {
-    let userChoice = prompt("Enter your choice:");
-    userChoice = userChoice.toLowerCase().trim();
+function playRound(callback) {
 
-    if (userChoice == "rock" || userChoice == "paper" || userChoice == "scissors")
-        return userChoice;
-    
-    console.log("Unrecognized choice, try again");
-    getPlayerChoice();
-}
+    const computerChoice = getComputerChoice();
+    const playerChoice = callback.target.id;
+    const str = `[COMPUTER] ${computerChoice} - ${playerChoice} [YOU]`;
+    roundChoices.textContent = str;
 
-function playRound(playerChoice, computerChoice) {
-
-    const choices = `[Computer choice] ${computerChoice} - ${playerChoice} [your choice]`;
-    
     // tie cases
     if (playerChoice == computerChoice) {
-        console.log(choices, "--> It's a tie")
-        return 0;
+        roundResults.textContent = 'It is a tie!'
+        return;
     } 
 
     // win cases for the user
-    else if (playerChoice == "rock" && computerChoice == "scissors" ||
-            playerChoice == "paper" && computerChoice == "rock" ||
-            playerChoice == "scissors" && computerChoice == "paper") {
-        console.log(choices, "--> You won!")
-        return 1;
+    else if (playerChoice == 'rock' && computerChoice == 'scissors' ||
+            playerChoice == 'paper' && computerChoice == 'rock' ||
+            playerChoice == 'scissors' && computerChoice == 'paper') {
+            roundResults.textContent = 'You won!';
+            globalPlayerScore++;
+            playerScore.textContent = globalPlayerScore;
     }
     
     // lose cases for the user
-    console.log(choices, "--> You lost :(")
-    return 2;
-}
-
-function playGame() {
-
-    const TOTAL_ROUNDS = 5;
-    let computerScore = 0;
-    let playerScore = 0;
-
-    console.log("ROCK PAPER SCISSORS!")
-
-    for (let idx = 0; idx < TOTAL_ROUNDS; idx++) {
-
-        console.log(`ROUND ${idx + 1}`)
-
-        const computerChoice = getComputerChoice();
-        const playerChoice = getPlayerChoice();
-
-        let winner = playRound(computerChoice, playerChoice);
-
-        if (winner === 1) playerScore++;
-        else if (winner === 2) computerScore++;
-
-        console.log(`SCORE: [Computer] ${computerScore} - ${playerScore} [You]`)
+    else {
+        roundResults.textContent = 'You lost :(';
+        globalComputerScore++;
+        computerScore.textContent = globalComputerScore; 
     }
 
-    if (playerScore == computerScore) console.log("IT'S A TIE");
-    else if (playerScore > computerScore) console.log("YOU WON!");
-    else console.log("YOU LOST :(");
-    
 }
 
-
-console.log(playGame());
-
+function resetScore() {
+    globalPlayerScore = 0;
+    globalComputerScore = 0;
+    playerScore.textContent = globalPlayerScore;
+    computerScore.textContent = globalComputerScore;
+}
