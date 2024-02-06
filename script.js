@@ -38,7 +38,7 @@ function playRound(callback) {
 
     // tie cases
     if (playerChoice == computerChoice) {
-        roundResults.textContent = "It is a tie!"
+        roundResults.textContent = "It's a tie!"
         return;
     } 
 
